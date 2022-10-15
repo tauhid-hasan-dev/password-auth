@@ -95,6 +95,7 @@ const DaisyForm = () => {
             }
            <button className="btn btn-primary text-white" type='submit'>Register</button>
            <p><small>Already have an account? please <Link to='/login' className='text-primary underline'>Log in</Link></small></p>
+           
       </form>
    </div>
     );

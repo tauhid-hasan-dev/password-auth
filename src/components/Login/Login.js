@@ -1,16 +1,56 @@
 
-import { getAuth, sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
+import { FacebookAuthProvider, getAuth, GithubAuthProvider, GoogleAuthProvider, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+
 
 const auth = getAuth();
 
 const Login = () => {
     const [success, setSucess] = useState(false);
     const [errorMesseage, setErrorMessage] = useState('');
-    const [resetEmail, setResetEmail] = useState('')
+    const [resetEmail, setResetEmail] = useState('');
+
+    const facebookProvider = new FacebookAuthProvider();
+    const googleProvider = new GoogleAuthProvider();
+    const gitHubProvider = new GithubAuthProvider();
+
+    const handleSignInWithFacebook = () =>{
+        signInWithPopup(auth, facebookProvider)
+        .then((result)=>{
+            const user = result.user;
+            console.log(user);
+        })
+        .catch((error) => {
+            setErrorMessage(error.message)
+        })
+    }
+
+    const handleSignInWithGoogle = () =>{
+        signInWithPopup(auth, googleProvider)
+        .then((result)=>{
+            const user = result.user;
+            console.log(user);
+        })
+        .catch((error) => {
+            setErrorMessage(error.message)
+        })
+
+    }
+
+    const handleSignInWithGitHub = () =>{
+        signInWithPopup(auth, gitHubProvider )
+        .then(result =>{
+            const user = result.user;
+            console.log(user)
+        })
+        /* .catch((error) => {
+            setErrorMessage(error.message)
+        }) */
+    }
+
+
     const handleSubmit = (event) =>{
-  
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
@@ -69,6 +109,11 @@ const Login = () => {
                     <button className="btn btn-link" onClick={handleResetPassword}>reset</button>
                 </div>
                 <p><small>Are you new to this website? please <Link to='/register' className='text-primary underline'>Register</Link></small></p>
+                <p><small>Log in with one of the following: </small></p>
+                <button className="btn btn-primary" onClick={handleSignInWithFacebook}> Facebook</button>
+                <button className="btn border-t-orange-500 bg-orange-500" onClick={handleSignInWithGoogle}> Google</button>
+
+                <button className="btn border-t-orange-500 bg-orange-500" onClick={handleSignInWithGitHub}> Github</button>
            </form>
            
         </div>
