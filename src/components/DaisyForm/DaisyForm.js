@@ -73,13 +73,20 @@ const DaisyForm = () => {
       <form className='flex flex-col gap-3 w-72' onSubmit={handleRegister}>
            <p className='text-2xl font-semibold text-primary'>Please Register</p>
 
-           
+           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+              Name
+            </label>
            <input type="text" placeholder="Your Name" name='name' className="input input-bordered input-accent w-full max-w-xs" required />
+ 
 
-           
+             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+              Email
+            </label>
            <input type="email" placeholder="Your email" name='email' className="input input-bordered input-accent w-full max-w-xs" required />
 
-          
+           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+              Password
+            </label>
           <input type="password" placeholder="Your Password" name='password' className="input input-bordered input-accent w-full max-w-xs" required />
                <p className='text-red-500' >{passwordError}</p>
 
